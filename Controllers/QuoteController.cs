@@ -21,7 +21,12 @@ namespace RestApi.Controllers
         {
             _context = context;
         }
-
+        
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Quote>>> Getquotes()
+        {
+            return await _context.quotes.ToListAsync();
+        }
         // GET: api/Quote
         [HttpGet("Amount")]
         public async Task<IActionResult> getAmount()

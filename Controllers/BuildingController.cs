@@ -21,14 +21,10 @@ namespace RestApi.Controllers
             _context = context;
         }
 
-        [HttpGet("Amount")]
-        public async Task<IActionResult> getAmount()
+       [HttpGet]
+        public async Task<ActionResult<IEnumerable<Battery>>> Getbatteries()
         {
-            var list = _context.buildings.ToList();
-            var listCount = list.Count;
-            var amount = new JObject ();
-            amount["amount"] = listCount;
-            return Content (amount.ToString (), "application/json");
+            return await _context.batteries.ToListAsync();
         }
         
         // GET: api/Building

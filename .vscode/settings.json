@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin\\Release\\netcoreapp3.1\\publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/4b542dbb-00e4-41eb-8c68-1fd655d00dfd/resourceGroups/Anthony/providers/Microsoft.Web/sites/alexa-rest-api"
+}

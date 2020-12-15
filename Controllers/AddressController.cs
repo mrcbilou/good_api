@@ -30,17 +30,20 @@ namespace RestApi.Controllers
         }
 
         [HttpGet("Amount")]
-        public async Task<IActionResult> getCitiesAll()
+        public ActionResult<List<Address>> GetAll()
         {
             var allAdresses = _context.addresses.ToList();
 
+            List<Address> addresses = new List<Address>();
+
+
             var allCities = allAdresses.GroupBy(x => x.city).Select(g => g.First()).ToList();
+            foreach(var address in allCities)
+            {
+                addresses.Add(address);
+            }
 
-            var citiesCount = allCities.Count;
-
-            var amount = new JObject ();
-            amount["amount"] = citiesCount;
-            return Content (amount.ToString (), "application/json");
+            return addresses;
             
         }
 
