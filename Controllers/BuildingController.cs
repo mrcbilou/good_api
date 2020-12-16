@@ -28,7 +28,7 @@ namespace RestApi.Controllers
         }
         
         // GET: api/Building
-        [HttpGet]
+        [HttpGet("Intervention")]
         public ActionResult<List<Building>> GetAll ()
         {
             var list_el = _context.elevators.ToList(); // List of all the elevators in the database

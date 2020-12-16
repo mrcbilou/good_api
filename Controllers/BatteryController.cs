@@ -38,9 +38,9 @@ namespace RestApi.Controllers
             return Content (amount.ToString (), "application/json");
         }
 
-        // GET: api/Battery/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Battery>> GetBattery(long id)
+        // GET: api/Battery/status/5
+        [HttpGet("status/{id}")]
+        public async Task<ActionResult<Battery>> GetBatteryStatus(long id)
         {
             var battery = await _context.batteries.FindAsync(id);
 
@@ -52,6 +52,20 @@ namespace RestApi.Controllers
             var status = new JObject ();
             status["status"] = battery.battery_status;
             return Content (status.ToString (), "application/json");
+        }
+
+        // GET: api/Battery/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Battery>> GetBattery(long id)
+        {
+            var battery = await _context.batteries.FindAsync(id);
+
+            if (battery == null)
+            {
+                return NotFound();
+            }
+
+            return battery;
         }
 
         [HttpGet("forBattery/{id}")]

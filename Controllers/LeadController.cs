@@ -60,6 +60,11 @@ namespace RestApi.Controllers
             
             return final_list;
         }
+        [HttpGet("All")]
+        public async Task<ActionResult<IEnumerable<Lead>>> GetLeads()
+        {
+            return await _context.leads.ToListAsync();
+        }
 
        [HttpGet("Amount")]
         public async Task<IActionResult> getAmount()

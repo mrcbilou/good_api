@@ -22,7 +22,7 @@ namespace RestApi.Controllers
             _context = context;
         }
         
-        [HttpGet]
+        [HttpGet("Date")]
         public async Task<ActionResult<IEnumerable<Quote>>> Getquotes()
         {
             return await _context.quotes.ToListAsync();
@@ -50,6 +50,12 @@ namespace RestApi.Controllers
             }
 
             return quote;
+        }
+        
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Quote>>> GetQuotes()
+        {
+            return await _context.quotes.ToListAsync();
         }
 
         // PUT: api/Quote/5
