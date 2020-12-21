@@ -21,7 +21,7 @@ namespace RestApi.Controllers
             _context = context;
         }
 
-        
+
         // GET: api/Customer
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> Getcustomers()
@@ -34,9 +34,9 @@ namespace RestApi.Controllers
         {
             var list = _context.customers.ToList();
             var listCount = list.Count;
-            var amount = new JObject ();
+            var amount = new JObject();
             amount["amount"] = listCount;
-            return Content (amount.ToString (), "application/json");
+            return Content(amount.ToString(), "application/json");
         }
         // GET: api/Customer/5
         [HttpGet("{id}")]
@@ -48,11 +48,11 @@ namespace RestApi.Controllers
             {
                 return NotFound();
             }
-            var email = new JObject ();
+            var email = new JObject();
             email["company_contact_email"] = customer.company_contact_email;
-            return Content (email.ToString (), "application/json");
+            return Content(email.ToString(), "application/json");
         }
-        [HttpGet("Email/{company_contact_email}")]                           
+        [HttpGet("Email/{company_contact_email}")]
         public async Task<ActionResult<Customer>> GetCustomerByEmail(string company_contact_email)
         {
             var customer = await _context.customers.FindAsync(company_contact_email);
@@ -61,9 +61,24 @@ namespace RestApi.Controllers
             {
                 return NotFound();
             }
-            var email = new JObject ();
+            var email = new JObject();
             email["company_contact_email"] = customer.company_contact_email;
-            return Content (email.ToString (), "application/json");
+            return Content(email.ToString(), "application/json");
+        }
+
+        [HttpGet("find/{company_contact_email}")]
+        public ActionResult<Customer> GetCustomerEmail(string company_contact_email)
+        {
+            var decodedEmail = System.Web.HttpUtility.UrlDecode(company_contact_email);
+            Console.WriteLine(decodedEmail);
+            var customerEmail = _context.customers
+            .Where(c => c.company_contact_email == decodedEmail);
+            //.FirstOrDefaultAsync();
+            if (customerEmail == null)
+            {
+                return NotFound();
+            }
+            return Ok(customerEmail);
         }
         // PUT: api/Customer/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

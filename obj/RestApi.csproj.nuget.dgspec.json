@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\alexa\\Rest_Api_Alexa\\RestApi.csproj": {}
+    "C:\\Users\\User\\week13alexa\\Rest_Api_Alexa\\RestApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\alexa\\Rest_Api_Alexa\\RestApi.csproj": {
+    "C:\\Users\\User\\week13alexa\\Rest_Api_Alexa\\RestApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\alexa\\Rest_Api_Alexa\\RestApi.csproj",
+        "projectUniqueName": "C:\\Users\\User\\week13alexa\\Rest_Api_Alexa\\RestApi.csproj",
         "projectName": "RestApi",
-        "projectPath": "C:\\Users\\User\\alexa\\Rest_Api_Alexa\\RestApi.csproj",
+        "projectPath": "C:\\Users\\User\\week13alexa\\Rest_Api_Alexa\\RestApi.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\alexa\\Rest_Api_Alexa\\obj\\",
+        "outputPath": "C:\\Users\\User\\week13alexa\\Rest_Api_Alexa\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"

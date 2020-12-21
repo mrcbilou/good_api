@@ -20,7 +20,7 @@ namespace RestApi.Models
         public virtual DbSet<Address> addresses { get; set; }
         public virtual DbSet<BuildingDetail> building_details { get; set; }
         public virtual DbSet<Customer> customers { get; set; }
-        public virtual DbSet<Employe> employees { get; set; }
+        public virtual DbSet<Employee> employees { get; set; }
         public virtual DbSet<Intervention> interventions { get; set; }
         public DbSet<Quote> quotes { get; set; }
     }

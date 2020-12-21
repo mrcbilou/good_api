@@ -29,8 +29,8 @@ namespace RestApi.Controllers
         }
         // GET: api/Elevator
         [HttpGet("Active")]
-        public ActionResult<List<Elevator>> GetAll ()
-            {
+        public ActionResult<List<Elevator>> GetAll()
+        {
             var list = _context.elevators.ToList(); // List of all the elevators in the database
 
             if (list == null)
@@ -41,8 +41,9 @@ namespace RestApi.Controllers
             // Add elevators in the list if they don't have an ACTIVE status
             foreach (var elevator in list)
             {
-                if (elevator.elevator_status != "ACTIVE") {
-                    inactive_elevator_list.Add (elevator);
+                if (elevator.elevator_status != "ACTIVE")
+                {
+                    inactive_elevator_list.Add(elevator);
                 }
             }
             return inactive_elevator_list;
@@ -54,9 +55,9 @@ namespace RestApi.Controllers
         {
             var list = _context.elevators.ToList();
             var listCount = list.Count;
-            var amount = new JObject ();
+            var amount = new JObject();
             amount["amount"] = listCount;
-            return Content (amount.ToString (), "application/json");
+            return Content(amount.ToString(), "application/json");
         }
 
         [HttpGet("Inactive/Amount")]
@@ -72,15 +73,16 @@ namespace RestApi.Controllers
             // Add elevators in the list if they don't have an ACTIVE status
             foreach (var elevator in list)
             {
-                if (elevator.elevator_status != "ACTIVE") {
-                    inactive_elevator_list.Add (elevator);
+                if (elevator.elevator_status != "ACTIVE")
+                {
+                    inactive_elevator_list.Add(elevator);
                 }
             }
 
             var listCount = inactive_elevator_list.Count;
-            var amount = new JObject ();
+            var amount = new JObject();
             amount["amount"] = listCount;
-            return Content (amount.ToString (), "application/json");
+            return Content(amount.ToString(), "application/json");
         }
 
         // GET: api/Elevator/5
@@ -94,9 +96,22 @@ namespace RestApi.Controllers
                 return NotFound();
             }
             // Create a message to show the new status
-            var status = new JObject ();
+            var status = new JObject();
             status["status"] = elevator.elevator_status;
-            return Content (status.ToString (), "application/json");
+            return Content(status.ToString(), "application/json");
+        }
+
+        [HttpGet("Spec/{id}")]
+        public async Task<ActionResult<Elevator>> GetElevatorSpec(long id)
+        {
+            var elevator = await _context.elevators.FindAsync(id);
+
+            if (elevator == null)
+            {
+                return NotFound();
+            }
+
+            return elevator;
         }
 
         [HttpGet("forColumn/{id}")]
@@ -106,7 +121,7 @@ namespace RestApi.Controllers
             List<Elevator> elevatorsAll = _context.elevators.ToList();
             List<Elevator> columnsElevators = new List<Elevator>();
             // select relevant columns
-            foreach(Elevator elevator in elevatorsAll)
+            foreach (Elevator elevator in elevatorsAll)
             {
                 if ((elevator.column_id) == id)
                 {
@@ -116,7 +131,7 @@ namespace RestApi.Controllers
             }
             return columnsElevators;
 
-        }     
+        }
 
         // PUT: api/Elevator/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -124,20 +139,19 @@ namespace RestApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutElevator(long id, Elevator elevator)
         {
-            var e = await _context.elevators.FindAsync (id);
-            if (e == null) {
-                return NotFound ();
-           }
+            var e = await _context.elevators.FindAsync(id);
+            if (e == null)
+            {
+                return NotFound();
+            }
 
             e.elevator_status = elevator.elevator_status;
 
-            _context.elevators.Update (e);
-            _context.SaveChanges ();
+            _context.elevators.Update(e);
+            _context.SaveChanges();
 
             // Create a message to show the new status
-            var status = new JObject ();
-            status["message"] = "The status of the Elevator with the id number #" + e.Id + " have been changed to " + e.elevator_status;
-            return Content (status.ToString (), "application/json");
+            return Content(e.elevator_status);
         }
     }
 }
